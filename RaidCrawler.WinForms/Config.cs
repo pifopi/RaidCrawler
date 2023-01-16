@@ -6,7 +6,7 @@ namespace RaidCrawler.WinForms;
 public class ClientConfig : IDateAdvanceConfig, IWebhookConfig
 {
     // General
-    public string IP { get; set; } = "192.168.0.0";
+    public string IP { get; set; } = "192.168.1.65";
     public int UsbPort { get; set; }
     public SwitchProtocol Protocol { get; set; } = SwitchProtocol.WiFi;
     public string Game { get; set; } = "Scarlet";
@@ -23,12 +23,12 @@ public class ClientConfig : IDateAdvanceConfig, IWebhookConfig
     public bool EnableAlertWindow { get; set; } = true;
     public string AlertWindowMessage { get; set; } =
         "Match found! Hold Shift and click one of the arrow keys to jump to the matching result.";
-    public bool EnableNotification { get; set; }
-    public string DiscordWebhook { get; set; } = string.Empty;
-    public string DiscordMessageContent { get; set; } = string.Empty;
+    public bool EnableNotification { get; set; } = true;
+    public string DiscordWebhook { get; set; } = Environment.GetEnvironmentVariable("DISCORD_WEBHOOK_RAID_CRAWLER")!;
+    public string DiscordMessageContent { get; set; } = "<@282197676982927375> A raid was found";
 
     // Date Advance
-    public bool ZyroMethod { get; set; }
+    public bool ZyroMethod { get; set; } = true;
     public bool UseTouch { get; set; }
     public bool UseOvershoot { get; set; }
     public bool DodgeSystemUpdate { get; set; }
