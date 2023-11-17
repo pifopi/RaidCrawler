@@ -7,6 +7,8 @@ using RaidCrawler.Core.Structures;
 using RaidCrawler.WinForms.SubForms;
 using SysBot.Base;
 using System.Diagnostics;
+using System.Net;
+using System.Net.Sockets;
 using System.Text.Json;
 using static RaidCrawler.Core.Structures.Offsets;
 
@@ -61,6 +63,8 @@ public partial class MainWindow : Form
 
     private bool StopAdvances =>
         !Config.EnableFilters || RaidFilters.Count == 0 || RaidFilters.All(x => !x.Enabled);
+
+    Thread backgroundThread;
 
     public MainWindow()
     {
@@ -137,6 +141,25 @@ public partial class MainWindow : Form
             USB_Port_TB.Visible = false;
             USB_Port_label.Visible = false;
         }
+
+        //backgroundThread = new Thread(async () =>
+        //{
+        //    TcpListener server = new TcpListener(IPAddress.Parse("127.0.0.1"), 18069);
+        //    server.Start();
+        //    TcpClient client = await server.AcceptTcpClientAsync();
+        //    NetworkStream stream = client.GetStream();
+        //    BinaryReader reader = new BinaryReader(stream);
+        //    BinaryWriter writer = new BinaryWriter(stream);
+
+        //    while (true)
+        //    {
+        //        int inData = reader.ReadInt32();
+        //        int outData = inData * 2;
+        //        writer.Write(outData);
+        //        writer.Flush();
+        //    }
+        //});
+        //backgroundThread.Start();
     }
 
     private void UpdateStatus(string status)
